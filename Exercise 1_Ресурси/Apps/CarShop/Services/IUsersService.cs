@@ -9,5 +9,7 @@
         bool IsUsernameAvailable(string username);
 
         public bool IsUserMechanic(string Userid);
+
+        bool IsEmailAvailable(string email);
     }
 }
