@@ -3,6 +3,7 @@ using CarShop.Data.Models;
 using CarShop.ViewModels.Cars;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace CarShop.Services
@@ -20,7 +21,7 @@ namespace CarShop.Services
             var car=new Car
             { 
                 Model=input.Model,
-                Year=input.Year,
+                Year=int.Parse(input.Year),
                 PictureUrl=input.Image,
                 PlateNumber=input.PlateNumber,
                 OwnerId=input.OwnerId,
@@ -30,9 +31,41 @@ namespace CarShop.Services
             this.db.SaveChanges();
         }
 
-        public ICollection<ViewCarModel> AllCars()
+        public ICollection<ViewCarModel> AllCarsForClient(string userId)
         {
-            throw new NotImplementedException();
+            return this.db.Cars
+                .Where(x=> x.OwnerId==userId)
+                .Select(x=> new ViewCarModel
+                {
+                    Id=x.Id,
+                    Image=x.PictureUrl,
+                    Year=x.Year,
+                    Model=x.Model,
+                    PlateNumber=x.PlateNumber,
+                    Issues=x.Issues.Count(),
+                    FixedIssues=x.Issues.Where(x=> x.IsFixed==true).Count(),
+                })
+                .ToList();
+        }
+
+        public ICollection<ViewCarModel> AllCarsWithIssues()
+        {
+            var cars = this.db.Cars
+                .Select(x => new ViewCarModel
+                {
+                    Id = x.Id,
+                    Image = x.PictureUrl,
+                    Year = x.Year,
+                    Model = x.Model,
+                    PlateNumber = x.PlateNumber,
+                    Issues = x.Issues.Count(),
+                    FixedIssues = x.Issues.Where(x => x.IsFixed == true).Count(),
+                })                
+                .ToList()
+                .Where(x => x.RemainingIssues > 0)
+                .ToList();
+
+            return cars;
         }
     }
 }

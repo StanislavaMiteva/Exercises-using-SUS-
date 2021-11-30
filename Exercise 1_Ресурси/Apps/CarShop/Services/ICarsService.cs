@@ -9,6 +9,7 @@ namespace CarShop.Services
     {
         void AddCar(AddCarInputModel input);
 
-        ICollection<ViewCarModel> AllCars();
+        ICollection<ViewCarModel> AllCarsForClient(string userId);
+        ICollection<ViewCarModel> AllCarsWithIssues();
     }
 }
