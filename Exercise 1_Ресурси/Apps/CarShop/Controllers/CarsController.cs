@@ -4,8 +4,6 @@ using SUS.HTTP;
 using SUS.MvcFramework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CarShop.Controllers
@@ -80,7 +78,7 @@ namespace CarShop.Controllers
                 return this.Error("Not authorized!");
             }
 
-            if (input.Model.Length<5 || input.Model.Length>20 || string.IsNullOrWhiteSpace(input.Model))
+            if (string.IsNullOrWhiteSpace(input.Model) || input.Model.Length<5 || input.Model.Length>20)
             {
                 return this.Error("Model should be between 5 and 20 characters long.");
             }

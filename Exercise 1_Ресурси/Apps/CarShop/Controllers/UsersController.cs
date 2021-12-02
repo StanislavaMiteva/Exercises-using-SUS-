@@ -33,7 +33,7 @@ namespace CarShop.Controllers
                 return this.Redirect("/");
             }
 
-            if (input.Username.Length<4 || input.Username.Length>20 || string.IsNullOrWhiteSpace(input.Username))
+            if (string.IsNullOrWhiteSpace(input.Username) || input.Username.Length<4 || input.Username.Length>20)
             {
                 return this.Error("Invalid username. The username should be between 4 and 20 characters long.");
             }

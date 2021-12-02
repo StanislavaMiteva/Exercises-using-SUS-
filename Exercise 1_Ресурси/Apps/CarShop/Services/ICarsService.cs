@@ -1,7 +1,5 @@
 ﻿using CarShop.ViewModels.Cars;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace CarShop.Services
 {
@@ -9,7 +7,8 @@ namespace CarShop.Services
     {
         void AddCar(AddCarInputModel input);
 
-        ICollection<ViewCarModel> AllCarsForClient(string userId);
-        ICollection<ViewCarModel> AllCarsWithIssues();
+        IEnumerable<ViewCarModel> AllCarsForClient(string userId);
+
+        IEnumerable<ViewCarModel> AllCarsWithIssues();
     }
 }

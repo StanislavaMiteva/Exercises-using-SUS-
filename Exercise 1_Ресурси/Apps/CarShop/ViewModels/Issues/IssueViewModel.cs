@@ -8,6 +8,8 @@
 
         public bool IsFixed { get; set; }
 
+        public string IsFixedAsString => IsFixed ? "Yes" : "Not yet";
+
         public string CarId { get; set; }
     }
 }

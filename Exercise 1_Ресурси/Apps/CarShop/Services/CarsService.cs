@@ -1,10 +1,8 @@
 ﻿using CarShop.Data;
 using CarShop.Data.Models;
 using CarShop.ViewModels.Cars;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace CarShop.Services
 {
@@ -31,7 +29,7 @@ namespace CarShop.Services
             this.db.SaveChanges();
         }
 
-        public ICollection<ViewCarModel> AllCarsForClient(string userId)
+        public IEnumerable<ViewCarModel> AllCarsForClient(string userId)
         {
             return this.db.Cars
                 .Where(x=> x.OwnerId==userId)
@@ -48,7 +46,7 @@ namespace CarShop.Services
                 .ToList();
         }
 
-        public ICollection<ViewCarModel> AllCarsWithIssues()
+        public IEnumerable<ViewCarModel> AllCarsWithIssues()
         {
             var cars = this.db.Cars
                 .Select(x => new ViewCarModel
