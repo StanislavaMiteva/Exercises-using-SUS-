@@ -2,7 +2,7 @@
 {
     public interface IUsersService
     {
-        string CreateUser(string username, string email, string password);
+        void CreateUser(string username, string email, string password);
 
         bool IsEmailAvailable(string email);
 
