@@ -8,5 +8,7 @@ namespace Git.Services
         void AddRepository(AddRepositoryInputModel input);
 
         IEnumerable<ViewRepositoryModel> AllPublicRepositories();
+
+        string GetRepositoryName(string id);
     }
 }

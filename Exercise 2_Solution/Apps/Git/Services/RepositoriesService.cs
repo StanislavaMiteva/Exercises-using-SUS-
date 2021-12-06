@@ -43,5 +43,12 @@ namespace Git.Services
                 })
                 .ToList();
         }
+
+        public string GetRepositoryName(string id)
+        {
+            return this.db.Repositories
+                .Find(id)
+                .Name;
+        }
     }
 }
