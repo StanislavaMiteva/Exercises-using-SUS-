@@ -1,7 +1,4 @@
 ﻿using SUS.HTTP;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 using SUS.MvcFramework;
 using System.ComponentModel.DataAnnotations;
@@ -110,7 +107,5 @@ namespace Git.Controllers
             this.SignOut();
             return this.Redirect("/");
         }
-
     }
-
 }

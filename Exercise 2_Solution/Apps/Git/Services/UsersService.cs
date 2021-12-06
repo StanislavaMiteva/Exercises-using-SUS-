@@ -26,7 +26,6 @@ namespace Git.Services
 
             this.db.Users.Add(user);
             this.db.SaveChanges();
-
         }
 
         public string GetUserId(string username, string password)
@@ -63,6 +62,5 @@ namespace Git.Services
                 return hashedInputStringBuilder.ToString();
             }
         }
-
     }
 }
