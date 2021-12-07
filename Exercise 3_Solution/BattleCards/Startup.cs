@@ -6,6 +6,7 @@
     using BattleCards.Data;
     using SIS.HTTP;
     using SIS.MvcFramework;
+    using BattleCards.Services;
 
     public class Startup : IMvcApplication
     {
@@ -16,7 +17,7 @@
 
         public void ConfigureServices(IServiceCollection serviceCollection)
         {
-            //serviceCollection.Add<IUsersService, UsersService>();
+            serviceCollection.Add<IUsersService, UsersService>();
         }
     }
 }
