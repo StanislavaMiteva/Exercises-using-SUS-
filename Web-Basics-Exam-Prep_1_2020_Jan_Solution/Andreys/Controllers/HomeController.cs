@@ -8,10 +8,10 @@
         [HttpGet("/")]
         public HttpResponse Index()
         {
-            //if (this.IsUserLoggedIn())
-            //{
-            //    return this.Redirect("/Products/All");
-            //}
+            if (this.IsUserLoggedIn())
+            {
+                return this.Redirect("/Products/All");
+            }
 
             return this.View();
         }

@@ -62,9 +62,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
     <Folder Include="ViewModels\Products\" />
-    <Folder Include="ViewModels\Users\" />
   </ItemGroup>
 
 </Project>
