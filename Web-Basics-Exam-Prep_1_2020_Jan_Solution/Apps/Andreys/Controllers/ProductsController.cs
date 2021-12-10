@@ -65,9 +65,26 @@ namespace Andreys.Controllers
             return this.Redirect("/Home/Home");
         }
         
-        public HttpResponse Details(int productId)
+        public HttpResponse Details(int id)
         {
-            return this.View();
+            if (!this.IsUserSignedIn())
+            {
+                return this.Redirect("/Users/Login");
+            }
+
+            ViewProductDetailsModel model = this.productsService.GetById(id);
+            return this.View(model);
+        }
+
+        public HttpResponse Delete(int id)
+        {
+            if (!this.IsUserSignedIn())
+            {
+                return this.Redirect("/Users/Login");
+            }
+            
+            this.productsService.Delete(id);
+            return this.Redirect("/");
         }
     }
 }

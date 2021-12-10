@@ -11,6 +11,8 @@ namespace Andreys.Services
 
         IEnumerable<ViewProductHomePageModel> All();
 
-        ViewProductDetailsModel GetById(string productId);
+        ViewProductDetailsModel GetById(int productId);
+
+        void Delete(int id);
     }
 }

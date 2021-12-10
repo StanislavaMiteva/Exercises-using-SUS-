@@ -46,9 +46,28 @@ namespace Andreys.Services
                 .ToList();
         }
 
-        public ViewProductDetailsModel GetById(string productId)
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var productToDelete=this.db.Products
+                .Find(id);
+            this.db.Products.Remove(productToDelete);
+            this.db.SaveChanges();
+        }
+
+        public ViewProductDetailsModel GetById(int productId)
+        {
+            return this.db.Products                
+                .Select(x=> new ViewProductDetailsModel 
+                {
+                    Id=x.Id,
+                    Name=x.Name,
+                    Description=x.Description,
+                    ImageUrl=x.ImageUrl,
+                    Gender=x.Gender.ToString(),
+                    Category=x.Category.ToString(),
+                    Price=x.Price,
+                })
+                .FirstOrDefault(x => x.Id == productId);
         }
     }
 }
