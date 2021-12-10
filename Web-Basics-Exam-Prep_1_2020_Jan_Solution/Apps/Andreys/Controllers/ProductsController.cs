@@ -4,8 +4,6 @@ using Andreys.ViewModels.Products;
 using SUS.HTTP;
 using SUS.MvcFramework;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Andreys.Controllers
 {
@@ -61,7 +59,8 @@ namespace Andreys.Controllers
                 return this.Error("Gender is required and should be one of the dropdown menu");
             }
 
-            this.productsService.Add(input);
+            var creatorId = this.GetUserId();
+            this.productsService.Add(input,creatorId);
             return this.Redirect("/Home/Home");
         }
         
@@ -82,7 +81,14 @@ namespace Andreys.Controllers
             {
                 return this.Redirect("/Users/Login");
             }
-            
+
+            var userId = this.GetUserId();
+
+            if (!this.productsService.ProductCanBeDeleted(id,userId))
+            {
+                return this.Error("User not authorized! Can delete his own products only.");
+            }
+
             this.productsService.Delete(id);
             return this.Redirect("/");
         }

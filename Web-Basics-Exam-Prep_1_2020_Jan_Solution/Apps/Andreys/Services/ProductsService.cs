@@ -17,7 +17,7 @@ namespace Andreys.Services
             this.db = db;
         }
 
-        public void Add(AddProductInputModel input)
+        public void Add(AddProductInputModel input, string creatorId)
         {
             var product = new Product
             {
@@ -27,6 +27,7 @@ namespace Andreys.Services
                 Category = Enum.Parse<Category>(input.Category),
                 Gender = Enum.Parse<Gender>(input.Gender),
                 Price = decimal.Parse(input.Price),
+                CreatorId=creatorId,
             };
 
             this.db.Products.Add(product);
@@ -68,6 +69,15 @@ namespace Andreys.Services
                     Price=x.Price,
                 })
                 .FirstOrDefault(x => x.Id == productId);
+        }
+
+        public bool ProductCanBeDeleted(int productId, string userId)
+        {
+            var creatorId = this.db.Products
+                .FirstOrDefault(x => x.Id==productId)
+                .CreatorId;
+
+            return creatorId == userId;
         }
     }
 }

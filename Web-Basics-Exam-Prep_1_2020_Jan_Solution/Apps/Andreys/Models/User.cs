@@ -9,7 +9,7 @@ namespace Andreys.Models
         public User()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.UsersProducts = new HashSet<UserProduct>();
+            this.Products = new HashSet<Product>();
         }
 
         [Required]
@@ -24,6 +24,6 @@ namespace Andreys.Models
         [Required]
         public string Password { get; set; }
 
-        public virtual ICollection<UserProduct> UsersProducts { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

@@ -1,17 +1,17 @@
 ﻿using Andreys.ViewModels.Products;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Andreys.Services
 {
     public interface IProductsService
     {
-        void Add(AddProductInputModel input);
+        void Add(AddProductInputModel input, string creatorId);
 
         IEnumerable<ViewProductHomePageModel> All();
 
         ViewProductDetailsModel GetById(int productId);
+
+        bool ProductCanBeDeleted(int productId, string userId);
 
         void Delete(int id);
     }

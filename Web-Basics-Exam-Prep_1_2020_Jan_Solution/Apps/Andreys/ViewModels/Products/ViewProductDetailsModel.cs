@@ -1,6 +1,4 @@
-﻿using Andreys.Models;
-
-namespace Andreys.ViewModels.Products
+﻿namespace Andreys.ViewModels.Products
 {
     public class ViewProductDetailsModel: ViewProductHomePageModel
     {

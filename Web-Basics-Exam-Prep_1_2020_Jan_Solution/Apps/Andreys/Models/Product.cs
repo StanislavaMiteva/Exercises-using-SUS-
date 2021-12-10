@@ -1,14 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Andreys.Models
 {
     public class Product
-    {
-        public Product()
-        {
-            this.UsersProducts = new HashSet<UserProduct>();
-        }
+    {        
         public int Id { get; set; }
 
         [Required]
@@ -26,6 +23,9 @@ namespace Andreys.Models
 
         public Gender Gender { get; set; }
 
-        public virtual ICollection<UserProduct> UsersProducts { get; set; }
+        [ForeignKey(nameof(User))]
+        public string CreatorId { get; set; }
+
+        public virtual User Creator { get; set; }
     }
 }

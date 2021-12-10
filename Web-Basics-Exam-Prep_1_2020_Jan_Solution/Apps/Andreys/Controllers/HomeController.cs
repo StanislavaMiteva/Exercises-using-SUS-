@@ -1,7 +1,6 @@
 ﻿namespace Andreys.App.Controllers
 {
     using Andreys.Services;
-    using Andreys.ViewModels.Products;
     using SUS.HTTP;
     using SUS.MvcFramework;
 

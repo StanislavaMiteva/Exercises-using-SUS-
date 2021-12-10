@@ -18,8 +18,6 @@
 
         public DbSet<Product> Products { get; set; }
 
-        public DbSet<UserProduct> UsersProducts { get; set; }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -28,12 +26,6 @@
             }
 
             base.OnConfiguring(optionsBuilder);
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<UserProduct>()
-                .HasKey(k => new { k.UserId, k.ProductId });
-        }
+        }        
     }
 }
