@@ -16,7 +16,7 @@
 
         public DbSet<User> Users { get; set; }
 
-        public DbSet<Product> Product { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         public DbSet<UserProduct> UsersProducts { get; set; }
 
