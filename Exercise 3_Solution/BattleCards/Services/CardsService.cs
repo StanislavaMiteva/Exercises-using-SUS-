@@ -1,0 +1,75 @@
+﻿using BattleCards.Data;
+using BattleCards.Models;
+using BattleCards.ViewModels.Cards;
+
+using System.Collections.Generic;
+using System.Linq;
+
+namespace BattleCards.Services
+{
+    public class CardsService : ICardsService
+    {
+        private readonly ApplicationDbContext db;
+
+        public CardsService(ApplicationDbContext db)
+        {
+            this.db = db;
+        }
+
+        public void AddCard(AddCardInputModel input, string userId)
+        {
+            var card = new Card
+            {
+                Attack = int.Parse(input.Attack),
+                Description = input.Description,
+                Health = int.Parse(input.Health),
+                ImageUrl = input.Image,
+                Keyword = input.Keyword,
+                Name = input.Name,
+            };
+
+            card.UsersCard.Add(new UserCard
+            {
+                Card = card,
+                UserId = userId,
+            });
+            this.db.Cards.Add(card);
+            this.db.SaveChanges();
+        }
+
+        public IEnumerable<ViewCardModel> AllCards()
+        {
+            return this.db.Cards
+                .Select(x => new ViewCardModel
+                {
+                    Id = x.Id,
+                    Attack = x.Attack,
+                    Description = x.Description,
+                    Health = x.Health,
+                    ImageUrl = x.ImageUrl,
+                    Keyword = x.Keyword,
+                    Name = x.Name,
+                })
+                .ToList();
+        }
+
+        public IEnumerable<ViewCardModel> CollectionByUserId(string userId)
+        {
+             var temp= this.db.UsersCards
+                .Where(x=> x.UserId==userId)
+                .Select(x => new ViewCardModel
+                {
+                    Id = x.CardId,
+                    Name = x.Card.Name,
+                    ImageUrl = x.Card.ImageUrl,
+                    Keyword = x.Card.Keyword,
+                    Attack = x.Card.Attack,
+                    Health = x.Card.Health,
+                    Description = x.Card.Description,
+                })
+                .ToList();
+
+            return temp;
+        }
+    }
+}

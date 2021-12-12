@@ -1,14 +1,13 @@
-﻿using SIS.MvcFramework;
-using System;
+﻿using SUS.MvcFramework;
 using System.Threading.Tasks;
 
 namespace BattleCards
 {
-    public static class Program
+    public class Program
     {
-        public static async Task Main()
+        public static async Task Main(string[] args)
         {
-            await WebHost.StartAsync(new Startup());
+            await Host.CreateHostAsync(new Startup());
         }
     }
 }

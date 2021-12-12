@@ -1,9 +1,8 @@
 ﻿using BattleCards.Services;
 using BattleCards.ViewModels.Users;
 
-using SIS.HTTP;
-using SIS.MvcFramework;
-
+using SUS.HTTP;
+using SUS.MvcFramework;
 using System.ComponentModel.DataAnnotations;
 
 namespace BattleCards.Controllers
@@ -19,7 +18,7 @@ namespace BattleCards.Controllers
 
         public HttpResponse Register()
         {
-            if (this.IsUserLoggedIn())
+            if (this.IsUserSignedIn())
             {
                 return this.Redirect("/");
             }
@@ -30,7 +29,7 @@ namespace BattleCards.Controllers
         [HttpPost]
         public HttpResponse Register(RegisterInputModel input)
         {
-            if (this.IsUserLoggedIn())
+            if (this.IsUserSignedIn())
             {
                 return this.Redirect("/");
             }
@@ -72,35 +71,35 @@ namespace BattleCards.Controllers
 
         public HttpResponse Login()
         {
-            if (this.IsUserLoggedIn())
+            if (this.IsUserSignedIn())
             {
                 return this.Redirect("/");
             }
-
+            
             return this.View();
         }
 
         [HttpPost]
         public HttpResponse Login(string username, string password)
         {
-            if (this.IsUserLoggedIn())
+            if (this.IsUserSignedIn())
             {
                 return this.Redirect("/");
             }
-
+            
             var userId = this.usersService.GetUserId(username, password);
             if (userId == null)
             {
                 return this.Error("Invalid username or password");
             }
-
+                        
             this.SignIn(userId);
             return this.Redirect("/Cards/All");
         }
 
         public HttpResponse Logout()
         {
-            if (!this.IsUserLoggedIn())
+            if (!this.IsUserSignedIn())
             {
                 return this.Redirect("/Users/Login");
             }
@@ -109,5 +108,4 @@ namespace BattleCards.Controllers
             return this.Redirect("/");
         }
     }
-
 }
