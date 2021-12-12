@@ -115,5 +115,16 @@ namespace BattleCards.Controllers
             }
             return this.Redirect("/Cards/All");
         }
+
+        public HttpResponse RemoveFromCollection(int cardId)
+        {
+            if (!this.IsUserSignedIn())
+            {
+                return this.Redirect("/Users/Login");
+            }
+
+            this.cardsService.DeleteFromCollection(this.GetUserId(), cardId);
+            return this.Redirect("/Cards/Collection");
+        }
     }
 }

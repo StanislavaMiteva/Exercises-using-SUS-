@@ -90,5 +90,13 @@ namespace BattleCards.Services
                 })
                 .ToList();
         }
+
+        public void DeleteFromCollection(string userId, int cardId)
+        {
+            var cardToDeleteFromCollection = this.db.UsersCards
+                .FirstOrDefault(x => x.CardId == cardId && x.UserId == userId);
+            this.db.UsersCards.Remove(cardToDeleteFromCollection);
+            this.db.SaveChanges();
+        }
     }
 }

@@ -12,5 +12,7 @@ namespace BattleCards.Services
         IEnumerable<ViewCardModel> CollectionByUserId(string userId);
 
         bool AddCardToCollection(string userId, int cardId);
+
+        void DeleteFromCollection(string userId, int cardId);
     }
 }
