@@ -37,6 +37,27 @@ namespace BattleCards.Services
             this.db.SaveChanges();
         }
 
+        public bool AddCardToCollection(string userId, int cardId)
+        {
+            var cardInCollection = this.db.UsersCards
+                .FirstOrDefault(x => x.CardId == cardId && x.UserId == userId);
+
+
+            if (cardInCollection!=null)
+            {
+                return false;
+            }
+
+            this.db.UsersCards
+                .Add(new UserCard
+                {
+                    UserId = userId,
+                    CardId = cardId,
+                });
+            this.db.SaveChanges();
+            return true;
+        }
+
         public IEnumerable<ViewCardModel> AllCards()
         {
             return this.db.Cards
@@ -55,7 +76,7 @@ namespace BattleCards.Services
 
         public IEnumerable<ViewCardModel> CollectionByUserId(string userId)
         {
-             var temp= this.db.UsersCards
+             return this.db.UsersCards
                 .Where(x=> x.UserId==userId)
                 .Select(x => new ViewCardModel
                 {
@@ -68,8 +89,6 @@ namespace BattleCards.Services
                     Description = x.Card.Description,
                 })
                 .ToList();
-
-            return temp;
         }
     }
 }

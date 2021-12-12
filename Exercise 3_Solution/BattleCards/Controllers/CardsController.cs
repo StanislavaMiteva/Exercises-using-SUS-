@@ -99,5 +99,21 @@ namespace BattleCards.Controllers
 
             return this.View(cards);
         }
+
+        public HttpResponse AddToCollection(int cardId)
+        {
+            if (!this.IsUserSignedIn())
+            {
+                return this.Redirect("/Users/Login");
+            }
+            
+            var userId = this.GetUserId();
+            bool cardIsAddedToCollection = this.cardsService.AddCardToCollection(userId, cardId);
+            if (!cardIsAddedToCollection)
+            {
+                return this.Error("Card is already in collection.");
+            }
+            return this.Redirect("/Cards/All");
+        }
     }
 }
