@@ -1,10 +1,8 @@
-﻿using BattleCards.Models;
-using BattleCards.Services;
+﻿using BattleCards.Services;
 using BattleCards.ViewModels.Cards;
 
 using SUS.HTTP;
 using SUS.MvcFramework;
-using System;
 
 namespace BattleCards.Controllers
 {
