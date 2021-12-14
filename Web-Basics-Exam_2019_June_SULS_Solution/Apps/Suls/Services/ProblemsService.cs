@@ -39,5 +39,19 @@ namespace Suls.Services
                 })
                 .ToList();
         }
+
+        public string GetNameById(string id)
+        {
+            return this.db.Problems
+                .FirstOrDefault(x=> x.Id==id)
+                .Name;
+        }
+
+        public int GetPointsById(string id)
+        {
+            return this.db.Problems
+                .FirstOrDefault(x => x.Id == id)
+                .Points;
+        }
     }
 }

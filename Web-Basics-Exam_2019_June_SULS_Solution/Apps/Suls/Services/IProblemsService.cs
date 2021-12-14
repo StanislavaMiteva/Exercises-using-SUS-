@@ -11,5 +11,8 @@ namespace Suls.Services
 
         IEnumerable<ViewProblemHomePageModel> GetAll();
 
+        string GetNameById(string id);
+
+        int GetPointsById(string id);
     }
 }
