@@ -4,6 +4,7 @@ using SUS.HTTP;
 using SUS.MvcFramework;
 using System;
 using System.Collections.Generic;
+using Suls.Services;
 
 namespace Suls
 {
@@ -16,7 +17,8 @@ namespace Suls
 
         public void ConfigureServices(IServiceCollection serviceCollection)
         {
-            
+            serviceCollection.Add<IUsersService, UsersService>();
+            serviceCollection.Add<IProblemsService, ProblemsService>();
         }
     }
 }
