@@ -2,6 +2,7 @@
 using Suls.ViewModels.Problems;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Suls.Services
@@ -27,9 +28,16 @@ namespace Suls.Services
             this.db.SaveChanges();
         }
 
-        public IEnumerable<ViewProblemModel> GetAll()
+        public IEnumerable<ViewProblemHomePageModel> GetAll()
         {
-            throw new NotImplementedException();
+            return this.db.Problems
+                .Select(x=> new ViewProblemHomePageModel
+                {
+                    Id=x.Id,
+                    Name=x.Name,
+                    Count=x.Submissions.Count(),
+                })
+                .ToList();
         }
     }
 }

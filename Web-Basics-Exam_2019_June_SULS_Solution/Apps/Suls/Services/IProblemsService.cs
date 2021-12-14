@@ -9,7 +9,7 @@ namespace Suls.Services
     {
         void Add(AddProblemInputModel input);
 
-        IEnumerable<ViewProblemModel> GetAll();
+        IEnumerable<ViewProblemHomePageModel> GetAll();
 
     }
 }

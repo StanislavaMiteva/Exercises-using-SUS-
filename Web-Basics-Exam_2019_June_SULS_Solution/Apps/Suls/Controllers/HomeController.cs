@@ -1,10 +1,18 @@
-﻿using SUS.HTTP;
+﻿using Suls.Services;
+using SUS.HTTP;
 using SUS.MvcFramework;
 
 namespace Suls.Controllers
 {
     public class HomeController: Controller
     {
+        private readonly IProblemsService problemsService;
+
+        public HomeController(IProblemsService problemsService)
+        {
+            this.problemsService = problemsService;
+        }
+
         [HttpGet("/")]
         public HttpResponse Index()
         {
@@ -20,11 +28,11 @@ namespace Suls.Controllers
         {
             if (!this.IsUserSignedIn())
             {
-                return this.Redirect("/Home/Index");
+                return this.Redirect("/");
             }
 
-            
-            return this.View();
+            var problems = this.problemsService.GetAll();
+            return this.View(problems);
         }
     }
 }

@@ -50,5 +50,14 @@ namespace Suls.Controllers
             return this.Redirect("/");
         }
 
+        public HttpResponse Details(string id)
+        {
+            if (!this.IsUserSignedIn())
+            {
+                return this.Redirect("/Users/Login");
+            }
+
+            return this.View();
+        }
     }
 }
