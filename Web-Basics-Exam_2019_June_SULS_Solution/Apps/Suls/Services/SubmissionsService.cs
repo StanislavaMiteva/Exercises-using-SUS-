@@ -1,9 +1,9 @@
 ﻿using Suls.Data;
 using Suls.ViewModels.Submissions;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Suls.Services
 {
@@ -47,6 +47,14 @@ namespace Suls.Services
                     ProblemPoints=x.Problem.Points,
                 })
                 .ToList();
+        }
+
+        public void Delete(string submissionId)
+        {
+            var submissionToDelete=this.db.Submissions
+                .Find(submissionId);
+            this.db.Submissions.Remove(submissionToDelete);
+            this.db.SaveChanges();
         }
     }
 }

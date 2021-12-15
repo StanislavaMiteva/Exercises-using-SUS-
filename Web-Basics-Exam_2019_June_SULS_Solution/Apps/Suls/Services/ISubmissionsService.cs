@@ -9,5 +9,7 @@ namespace Suls.Services
         void Add(AddSubmissionInputModel input, string creatorId, int points);
 
         IEnumerable<ViewSubmissionModel> AllByProblemId(string problemId);
+
+        public void Delete(string submissionId);
     }
 }
