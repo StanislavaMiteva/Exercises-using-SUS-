@@ -1,8 +1,6 @@
-﻿using Suls.Data;
-using Suls.ViewModels.Submissions;
-using System;
+﻿using Suls.ViewModels.Submissions;
+
 using System.Collections.Generic;
-using System.Text;
 
 namespace Suls.ViewModels.Problems
 {
@@ -12,8 +10,6 @@ namespace Suls.ViewModels.Problems
 
         public string Name { get; set; }
 
-        public int Points { get; set; }
-
-        public virtual ICollection<ViewSubmissionModel> Submissions { get; set; }
+        public virtual IEnumerable<ViewSubmissionModel> Submissions { get; set; }
     }
 }

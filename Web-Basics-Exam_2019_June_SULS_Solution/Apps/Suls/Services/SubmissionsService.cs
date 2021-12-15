@@ -2,6 +2,7 @@
 using Suls.ViewModels.Submissions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Suls.Services
@@ -33,9 +34,19 @@ namespace Suls.Services
             this.db.SaveChanges();
         }
 
-        public IEnumerable<ViewSubmissionModel> All()
+        public IEnumerable<ViewSubmissionModel> AllByProblemId(string problemId)
         {
-            throw new NotImplementedException();
+            return this.db.Submissions
+                .Where(x => x.ProblemId == problemId)            
+                .Select(x=> new ViewSubmissionModel
+                {
+                    Id=x.Id,
+                    AchievedResult=x.AchievedResult,
+                    CreatedOn=x.CreatedOn,
+                    Username=x.User.Username,
+                    ProblemPoints=x.Problem.Points,
+                })
+                .ToList();
         }
     }
 }

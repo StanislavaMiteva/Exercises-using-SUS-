@@ -1,7 +1,6 @@
 ﻿using Suls.ViewModels.Submissions;
-using System;
+
 using System.Collections.Generic;
-using System.Text;
 
 namespace Suls.Services
 {
@@ -9,6 +8,6 @@ namespace Suls.Services
     {
         void Add(AddSubmissionInputModel input, string creatorId, int points);
 
-        IEnumerable<ViewSubmissionModel> All();
+        IEnumerable<ViewSubmissionModel> AllByProblemId(string problemId);
     }
 }
