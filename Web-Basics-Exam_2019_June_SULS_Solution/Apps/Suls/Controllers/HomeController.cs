@@ -18,21 +18,13 @@ namespace Suls.Controllers
         {
             if (this.IsUserSignedIn())
             {
-                return this.Redirect("/Home/IndexLoggedIn");
+                var problems = this.problemsService.GetAll();
+                return this.View(problems, "IndexLoggedIn");
             }
-
-            return this.View();
-        }
-
-        public HttpResponse IndexLoggedIn()
-        {
-            if (!this.IsUserSignedIn())
+            else
             {
-                return this.Redirect("/");
-            }
-
-            var problems = this.problemsService.GetAll();
-            return this.View(problems);
+                return this.View();
+            }            
         }
     }
 }

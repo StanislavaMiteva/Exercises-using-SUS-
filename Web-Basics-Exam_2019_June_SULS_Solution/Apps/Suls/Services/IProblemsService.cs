@@ -11,6 +11,6 @@ namespace Suls.Services
 
         string GetNameById(string id);
 
-        int GetPointsById(string id);
+        ViewProblemDetailsModel GetProblemDetailsById(string problemId);
     }
 }

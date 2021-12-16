@@ -2,7 +2,6 @@
 using Suls.ViewModels.Submissions;
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Suls.Services
@@ -10,22 +9,26 @@ namespace Suls.Services
     public class SubmissionsService : ISubmissionsService
     {
         private readonly ApplicationDbContext db;
+        private readonly Random random;
 
-        public SubmissionsService(ApplicationDbContext db)
+        public SubmissionsService(ApplicationDbContext db, Random random)
         {
             this.db = db;
+            this.random = random;
         }
 
-        public void Add(AddSubmissionInputModel input, string creatorId, int points)
-        {
-            Random rnd = new Random();
-            int achievedResult = rnd.Next(0, points);
+        public void Add(AddSubmissionInputModel input, string userId)
+        {            
+            var points = this.db.Problems
+                .FirstOrDefault(x => x.Id == input.ProblemId)
+                .Points;
+            int achievedResult = this.random.Next(0, points+1);
 
             var submission =new Submission 
             {
                 Code=input.Code,
                 CreatedOn=DateTime.UtcNow,
-                UserId=creatorId,
+                UserId=userId,
                 ProblemId=input.ProblemId,
                 AchievedResult=achievedResult,
             };
@@ -33,22 +36,7 @@ namespace Suls.Services
             this.db.Submissions.Add(submission);
             this.db.SaveChanges();
         }
-
-        public IEnumerable<ViewSubmissionModel> AllByProblemId(string problemId)
-        {
-            return this.db.Submissions
-                .Where(x => x.ProblemId == problemId)            
-                .Select(x=> new ViewSubmissionModel
-                {
-                    Id=x.Id,
-                    AchievedResult=x.AchievedResult,
-                    CreatedOn=x.CreatedOn,
-                    Username=x.User.Username,
-                    ProblemPoints=x.Problem.Points,
-                })
-                .ToList();
-        }
-
+             
         public void Delete(string submissionId)
         {
             var submissionToDelete=this.db.Submissions

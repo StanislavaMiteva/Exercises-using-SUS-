@@ -1,14 +1,10 @@
 ﻿using Suls.ViewModels.Submissions;
 
-using System.Collections.Generic;
-
 namespace Suls.Services
 {
     public interface ISubmissionsService
     {
-        void Add(AddSubmissionInputModel input, string creatorId, int points);
-
-        IEnumerable<ViewSubmissionModel> AllByProblemId(string problemId);
+        void Add(AddSubmissionInputModel input, string creatorId);
 
         public void Delete(string submissionId);
     }

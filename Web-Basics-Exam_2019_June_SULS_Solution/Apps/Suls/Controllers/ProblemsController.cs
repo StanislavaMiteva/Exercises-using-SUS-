@@ -9,12 +9,10 @@ namespace Suls.Controllers
     public class ProblemsController: Controller
     {
         private readonly IProblemsService problemsService;
-        private readonly ISubmissionsService submissionsService;
 
-        public ProblemsController(IProblemsService problemsService, ISubmissionsService submissionsService)
+        public ProblemsController(IProblemsService problemsService)
         {
             this.problemsService = problemsService;
-            this.submissionsService = submissionsService;
         }
 
         public HttpResponse Create()
@@ -57,12 +55,7 @@ namespace Suls.Controllers
                 return this.Redirect("/Users/Login");
             }
 
-            var model = new ViewProblemDetailsModel
-            {
-                Id = id,
-                Name = this.problemsService.GetNameById(id),
-                Submissions = this.submissionsService.AllByProblemId(id),
-            };
+            var model = this.problemsService.GetProblemDetailsById(id);
             return this.View(model);
         }
     }

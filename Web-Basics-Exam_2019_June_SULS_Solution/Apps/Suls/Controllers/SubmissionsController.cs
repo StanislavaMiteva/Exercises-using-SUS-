@@ -46,9 +46,8 @@ namespace Suls.Controllers
                 return this.Error("Code should be between 30 and 800 characters long.");
             }
 
-            var userId = this.GetUserId();
-            var points = this.problemsService.GetPointsById(input.ProblemId);
-            this.submissionsService.Add(input, userId,points);
+            var userId = this.GetUserId();            
+            this.submissionsService.Add(input, userId);
 
             return this.Redirect("/");
         }
